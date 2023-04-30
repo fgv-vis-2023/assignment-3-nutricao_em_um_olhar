@@ -3,7 +3,7 @@
 
 ## Tarefa 3: Visualização interativa
 
-Trabalho elaborado pelos alunos Bruno Fornaro Pereira e Vanessa Berwanger Wille para a disciplina de Visualização de Dados, com o objetivo de criar uma visualização interativa com a biblioteca D3.js. 
+Trabalho elaborado pelos alunos Bruno Fornaro Pereira [Bruno Fornaro Pereira](https://github.com/BrunoFornaro) e [Vanessa Berwanger Wille](https://github.com/VanessaWille) para a disciplina de Visualização de Dados, com o objetivo de criar uma visualização interativa com a biblioteca D3.js. 
 
 
 ## Nutrição em um Olhar
