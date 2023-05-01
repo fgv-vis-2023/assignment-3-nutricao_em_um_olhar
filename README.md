@@ -47,7 +47,7 @@ De começo, passamos bastante tempo entendendo como eram as funcionalidades do D
 ### O que os dados nos revela
 Pela natureza da interatividade da visualização, é evidente que os dados vão revelar resultados diferentes para cada usuário. Entretanto, no geral, podemos ver dois tipos de resultados interessantes que podem ser obtidos com a ferramenta implementada:
 + Conseguimos verificar de acordo com os nossos dados e as informações dos usuários, ao colocar alimentos e pesos que são da alimentação frequente do usuário, se ele costuma fazer refeições equilibradas,
-+ Com a ferramenta conseguimos com certa facilidade montar diferentes pratos que correspondem a uma alimentação equilibrada (com relação aos micronutrientes), as vezes com alimentos não antes pensados para uma alimentação desse tipo, pois conseguimos equilibrar com a quantidade de cada alimento ingerido (por exemplo, ingerir alimentos com um valor nutricional não muito bom, mas em baixa quantidade, para ainda assim conseguir uma refeição adequada).
++ Com a ferramenta conseguimos com certa facilidade montar diferentes pratos que correspondem a uma alimentação equilibrada (com relação aos macronutrientes), as vezes com alimentos não antes pensados para uma alimentação desse tipo, pois conseguimos equilibrar com a quantidade de cada alimento ingerido (por exemplo, ingerir alimentos com um valor nutricional não muito bom, mas em baixa quantidade, para ainda assim conseguir uma refeição adequada).
 
 
 ### Links importantes
