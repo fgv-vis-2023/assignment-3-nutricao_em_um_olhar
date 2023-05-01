@@ -40,9 +40,9 @@ De começo, passamos bastante tempo entendendo como eram as funcionalidades do D
 
 ### Imagens do funcionamento do site
 
-![Funcionamento1](./imags/img1.jpeg)
+![Funcionamento1](./imgs/img1.jpeg)
 
-![Funcionamento2](./imags/img2.jpeg)
+![Funcionamento2](./imgs/img2.jpeg)
 
 ### Links importantes
 * [Notebook observable](https://observablehq.com/d/ffb89fcb60d326fa)
