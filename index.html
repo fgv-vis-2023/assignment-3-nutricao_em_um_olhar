@@ -1,13 +1,208 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Nutrição em um olhar - Páginas dos projeto</title>
-  </head>
-  <body>
-    <h1>Nutrição em um olhar - Páginas dos projeto</h1>
-    <ul>
-      <li><a href="https://fgv-vis-2023.github.io/assignment-3-nutricao_em_um_olhar/interativo.html">MVP página 1</a></li>
-      <li><a href="https://fgv-vis-2023.github.io/assignment-3-nutricao_em_um_olhar/boxplot.html">MVP página 2</a></li>
-    </ul>
-  </body>
-</html>
+
+<head>
+    <!-- Link com o repositório do projeto no observable: https://observablehq.com/d/ffb89fcb60d326fa -->
+    <!-- Nome na aba do navegador -->
+    <title>Nutrição em um olhar</title>
+    <!-- Import o D3 -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Folha de estilos -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Título da página -->
+
+    <div class="conteiner">
+        <h1>NUTRIÇÃO EM UM OLHAR</h1>
+    </div>
+    <!-- Parágrafo de introdução -->
+    <div class="conteiner">
+        <h2>Sobre a ferramenta</h2>
+        <p class="introducao">O objetivo central dessa ferramenta é possibilitar ao visualizador um maior
+            entendimento sobre os alimentos (em especial, os macronutrientes)
+            e compreender se suas escolhas alimentares estão balanceadas.</p>
+
+        <p class="introducao">A partir de informações de peso, número de refeições por dia (por padrão,
+            definido como 3), quantidade de proteínas por quilograma (por padrão, 1.0g) e as proporções
+            desejadas de macronutrientes (por padrão, estão definidas como 25% para gorduras, 25% para
+            proteínas e 50% para carboidratos, recomendações da nutricionista Isolda Vasconcelos em
+            <a
+                href="https://www.boasaude.com.br/nutricao/15404/qual-a-proporcao-de-proteina-e-carboidratos-ideal-nas-refeicoes.html">
+                Saúde e Nutrição
+            </a>).
+            Essas proporções podem ser alteradas pelo usuário a depender do seu objetivo. Por exemplo, pessoas
+            sedentárias consomem, em geral, menos proteínas do que um atleta. Para entender melhor em qual grupo
+            você se encaixa, recomendamos ler algumas referências, como em <a
+                href="https://www.atletis.com.br/quantidade-proteina-dia#:~:text=Para%20adultos%20sedent%C3%A1rios%2C%20a%20quantidade,g%20a%20cada%20quilo%20no%20m%C3%A1ximo.">
+                "Descubra a quantidade ideal de proteína por dia" - Atletis Blog
+            </a>.
+        </p>
+
+        <p class="introducao"> Os dados necessários foram obtidos através do Kaggle, em
+            <a href="https://www.kaggle.com/datasets/ispangler/composio-nutricional-de-alimentos-taco">
+                Composição nutricional de alimentos - TACO
+            </a>. Nele temos dados sobre a composição dos principais alimentos consumidos no Brasil, baseado em um plano
+            de amostragem que garante valores representativos, com análises realizadas por laboratórios com
+            capacidade analítica comprovada.
+        </p>
+
+    </div>
+
+    <!-- Como utilizar a ferramenta -->
+    <div class="conteiner">
+        <h2>Como utilizar a ferramenta</h2>
+        <ul id="como_utilizar">
+            <li>Começamos informando alguns dados iniciais do usuário (caso não forem preenchidos, serão usados os dados
+                padrão):</li>
+            <ul>
+                <li>
+                    Peso: o peso do usuário em quilogramas (kg);
+                </li>
+                <li>
+                    Número de refeições: o número de refeições que o usuário faz por dia (por padrão, 3);
+                </li>
+                <li>
+                    Quantidade de proteínas por quilograma: a quantidade de proteínas em gramas que o usuário deseja
+                    consumir por Kg de massa corporal em um dia (por padrão, 1.0g);
+                </li>
+                <li>
+                    Proporção de proteína: a proporção de calorias com a fonte sendo proteína que o usuário deseja
+                    consumir em um dia (por padrão, 25%);
+                </li>
+                <li>
+                    Proporção de carboidrato: a proporção de calorias com a fonte sendo carboidrato que o usuário deseja
+                    consumir em um dia (por padrão, 50%);
+                </li>
+                <li>
+                    Proporção de lipídios (gordura): a proporção de calorias com a fonte sendo lipídeos que o usuário
+                    deseja consumir em um dia (por padrão, 25%),
+                </li>
+                <li>
+                    Tolerância: margem de erro na alimentação (Tolerância igual a 10% significa que a alimentação pode
+                    ter até 10% a mais ou a menos do que o desejado).
+                </li>
+            </ul>
+            <li>Com isso, podemos selecionar até 3 alimentos para uma refeição, os quais podem ser filtrados por:</li>
+            <ul>
+                <li>Texto: você pode inserir um texto para filtrar a lista com apenas os alimentos que contém aquela
+                    porção de texto (como uma palavra em específico, por exemplo),</li>
+                <li>Gráfico de violino (na esquerda): você pode selecionar uma porção do gráfico de violino (com a
+                    função de "brush") para filtrar a lista
+                    com apenas os alimentos que contém aquela porção de macronutrientes (a intersecção dos filtros).
+                </li>
+            </ul>
+            <li>Após escolher um alimento, devemos escolher qual dos alimentos estamos escolhendo (1, 2 ou 3), para
+                isso, utilizamos o dropdown ao lado do que seleciona o alimento;</li>
+            <li>Após escolher um alimento e qual sua "posição" no prato, devemos clicar no botão de confirmar para
+                atualizar os dados com a escolha (após isso podemos reiniciar o processo e escolher os outros alimentos,
+                até formar o prato com até 3 alimentos),</li>
+            <li>Após selecionar todos os alimentos do prato, é necessário indicar a quantidade de cada um deles que será
+                consumida na
+                refeição
+                (por padrão, 50g), para isso, temos um slider que nos permite variar a quantidade desejada.</li>
+        </ul>
+        <p>Com isso, conseguimos ver pelo gráfico de barras (à direita) se a refeição está balanceada ou não. Pela cor
+            do gráfico, podemos ver se a refeição está balanceada ou não, sendo: verde para balanceada, vermelho para
+            excesso do macronutriente e amerelo para falta do macronutriente na refeição.</p>
+        <p>Vale lembrar que alguns valores padrão foram definidos, com base nas opiniões de alguns nutricionistas que
+            foram indicados em fontes já citadas anteriormente. Esses valores podem ser alterados pelo usuário, caso ele
+            tenha outra recomendação de alimentação (dado que isso pode variar de acordo com o objetivo do usuário
+            também).</p>
+    </div>
+
+    <!-- Área para inserir informações do usuário -->
+    <div class="conteiner">
+        <h2>Informações do usuário</h2>
+        <div id="observablehq-inserts_cell-4c2eb3ea"></div>
+    </div>
+
+    <!-- Parte só últil no backend -->
+    <div id="observablehq-insert_atualize_barchart_cell-4c2eb3ea" class="not_visible"></div>
+
+    <!-- Seletor dos alimentos e sliders -->
+    <div id="seletor_e_sliders">
+        <!-- Seletor dos alimentos -->
+        <div id="observablehq-list_food_cell-4c2eb3ea"></div>
+
+        <!-- Sliders para os pesos dos alimentos -->
+        <div id="observablehq-sliders_quantity_cell-4c2eb3ea"></div>
+    </div>
+
+    <!-- Gráficos -->
+    <div id="observablehq-bar_chart_cell-4c2eb3ea"></div>
+
+    <!-- Parágrafo final -->
+    <div class="conteiner">
+        <h2>Links importantes</h2>
+        <p>Por fim, gostaríamos de deixar alguns links importantes desse projeto:</p>
+        <ul>
+            <li>
+                O <a href="https://observablehq.com/d/ffb89fcb60d326fa">repositório no observable</a> com o notebook no
+                qual foram desenvolvidas as visualizações desse projeto,
+            </li>
+            <li>
+                O <a href="https://github.com/fgv-vis-2023/assignment-3-nutricao_em_um_olhar">repositório no github</a>
+                com o código fonte desse projeto (a página html) e o relatório do mesmo.
+            </li>
+        </ul>
+    </div>
+
+    <!-- Parte só últil no backend -->
+    <div class="not_visible">
+        <div id="observablehq-init_bar_chart_cell-4c2eb3ea"></div>
+        <div id="observablehq-outputs_alimentos-4c2eb3ea"></div>
+        <div id="observablehq-filter_food_to_bar_chart-4c2eb3ea"></div>
+        <div id="observablehq-alimentos_selecionados-4c2eb3ea"></div>
+        <div id="observablehq-filtro_textual-4c2eb3ea"></div>
+        <div id="observablehq-num_alimento-4c2eb3ea"></div>
+        <div id="observablehq-botao_confirmar-4c2eb3ea"></div>
+        <div id="observablehq-function_to_sliders_of_quantity_of_food_cell-4c2eb3ea"></div>
+        <div id="observablehq-function_confirm_buttom-4c2eb3ea"></div>
+        <div id="observablehq-update_dropdown-4c2eb3ea"></div>
+        <div id="observablehq-update_dropdown_cell-4c2eb3ea"></div>
+        <div id="observablehq-brush_cell-4c2eb3ea"></div>
+        <div id="observablehq-violinplot_function_cell-4c2eb3ea"></div>
+        <div id="observablehq-BarChart-4c2eb3ea"></div>
+        <div id="observablehq-chart-4c2eb3ea"></div>
+        <div id="observablehq-pallete-4c2eb3ea"></div>
+        <p>Credit: <a href="https://observablehq.com/d/ffb89fcb60d326fa@1768">Untitled by Bruno Pereira Fornaro</a></p>
+    </div>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+
+    <!-- Link com o repositório do projeto no observable: https://observablehq.com/d/ffb89fcb60d326fa -->
+    <script type="module">
+        import { Runtime, Inspector } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+        import define from "https://api.observablehq.com/d/ffb89fcb60d326fa@1768.js?v=3";
+        new Runtime().module(define, name => {
+            if (name === "inserts_cell") return new Inspector(document.querySelector("#observablehq-inserts_cell-4c2eb3ea"));
+            if (name === "insert_atualize_barchart_cell") return new Inspector(document.querySelector("#observablehq-insert_atualize_barchart_cell-4c2eb3ea"));
+            if (name === "list_food_cell") return new Inspector(document.querySelector("#observablehq-list_food_cell-4c2eb3ea"));
+            if (name === "sliders_quantity_cell") return new Inspector(document.querySelector("#observablehq-sliders_quantity_cell-4c2eb3ea"));
+            if (name === "bar_chart_cell") return new Inspector(document.querySelector("#observablehq-bar_chart_cell-4c2eb3ea"));
+            if (name === "init_bar_chart_cell") return new Inspector(document.querySelector("#observablehq-init_bar_chart_cell-4c2eb3ea"));
+            if (name === "outputs_alimentos") return new Inspector(document.querySelector("#observablehq-outputs_alimentos-4c2eb3ea"));
+            if (name === "filter_food_to_bar_chart") return new Inspector(document.querySelector("#observablehq-filter_food_to_bar_chart-4c2eb3ea"));
+            if (name === "alimentos_selecionados") return new Inspector(document.querySelector("#observablehq-alimentos_selecionados-4c2eb3ea"));
+            if (name === "filtro_textual") return new Inspector(document.querySelector("#observablehq-filtro_textual-4c2eb3ea"));
+            if (name === "num_alimento") return new Inspector(document.querySelector("#observablehq-num_alimento-4c2eb3ea"));
+            if (name === "botao_confirmar") return new Inspector(document.querySelector("#observablehq-botao_confirmar-4c2eb3ea"));
+            if (name === "function_to_sliders_of_quantity_of_food_cell") return new Inspector(document.querySelector("#observablehq-function_to_sliders_of_quantity_of_food_cell-4c2eb3ea"));
+            if (name === "function_confirm_buttom") return new Inspector(document.querySelector("#observablehq-function_confirm_buttom-4c2eb3ea"));
+            if (name === "update_dropdown") return new Inspector(document.querySelector("#observablehq-update_dropdown-4c2eb3ea"));
+            if (name === "update_dropdown_cell") return new Inspector(document.querySelector("#observablehq-update_dropdown_cell-4c2eb3ea"));
+            if (name === "brush_cell") return new Inspector(document.querySelector("#observablehq-brush_cell-4c2eb3ea"));
+            if (name === "violinplot_function_cell") return new Inspector(document.querySelector("#observablehq-violinplot_function_cell-4c2eb3ea"));
+            if (name === "BarChart") return new Inspector(document.querySelector("#observablehq-BarChart-4c2eb3ea"));
+            if (name === "pallete") return new Inspector(document.querySelector("#observablehq-pallete-4c2eb3ea"));
+        });
+    </script>
+</body>

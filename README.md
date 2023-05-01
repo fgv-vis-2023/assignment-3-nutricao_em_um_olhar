@@ -34,4 +34,7 @@ O processo de desenvolvimento foi feito em conjunto, onde cada um dos integrante
 De começo, passamos bastante tempo entendendo como eram as funcionalidades do D3.js, bem como implementar as interações/conexões, processos nos quais passamos a maior parte do tempo. Antes do MVP, foram cerca de 12 horas de trabalho por integrante. Após o MVP, foram cerca de mais 60 horas, sendo que na maior parte do tempo nos reunimos para poder discutir algumas ideias e dúvidas que surgiam.
 
 
-
+### Links importantes
+* [Notebook observable](https://observablehq.com/d/ffb89fcb60d326fa)
+* [Página do projeto final](https://fgv-vis-2023.github.io/assignment-3-nutricao_em_um_olhar/)
+* [Links do MVP](https://fgv-vis-2023.github.io/assignment-3-nutricao_em_um_olhar/links_mvp.html/)
