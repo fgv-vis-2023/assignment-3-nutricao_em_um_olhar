@@ -19,10 +19,10 @@
 
 <body>
     <!-- Título da página -->
-
     <div class="conteiner">
         <h1>NUTRIÇÃO EM UM OLHAR</h1>
     </div>
+    
     <!-- Parágrafo de introdução -->
     <div class="conteiner">
         <h2>Sobre a ferramenta</h2>
@@ -116,35 +116,40 @@
             foram indicados em fontes já citadas anteriormente. Esses valores podem ser alterados pelo usuário, caso ele
             tenha outra recomendação de alimentação (dado que isso pode variar de acordo com o objetivo do usuário
             também).</p>
-            <br>
-            <p>Observação: a página foi desenvolvida para ficar bem dimensionada para uma tela (de notebook) com 15.6",
-                podendo ficar com algo mal alinhado em outras dimensões (infelizmente a página não é bem responsiva). Se
-                algo estiver fora do lugar, recomendamos utilizar a função de zoom out do navegador (atalho "CTRL -" para
-                grande parte dos navegadores).
-            </p>
-            
+        <br>
+        <p>Observação: a página foi desenvolvida para ficar bem dimensionada para uma tela (de notebook) com 15.6",
+            podendo ficar com algo mal alinhado em outras dimensões (infelizmente a página não é bem responsiva). Se
+            algo estiver fora do lugar, recomendamos utilizar a função de zoom out do navegador (atalho "CTRL -" para
+            grande parte dos navegadores).
+        </p>
+
     </div>
 
     <!-- Área para inserir informações do usuário -->
     <div class="conteiner">
         <h2>Informações do usuário</h2>
-        <div id="observablehq-inserts_cell-4c2eb3ea"></div>
+        <div id="observablehq-inserts_cell-50c5675d"></div>
     </div>
 
     <!-- Parte só últil no backend -->
-    <div id="observablehq-insert_atualize_barchart_cell-4c2eb3ea" class="not_visible"></div>
+    <div id="observablehq-insert_atualize_barchart_cell-50c5675d" class="not_visible"></div>
 
     <!-- Seletor dos alimentos e sliders -->
     <div id="seletor_e_sliders">
         <!-- Seletor dos alimentos -->
-        <div id="observablehq-list_food_cell-4c2eb3ea"></div>
+        <div id="observablehq-list_food_cell-50c5675d"></div>
 
         <!-- Sliders para os pesos dos alimentos -->
-        <div id="observablehq-sliders_quantity_cell-4c2eb3ea"></div>
+        <div id="observablehq-sliders_quantity_cell-50c5675d"></div>
     </div>
 
     <!-- Gráficos -->
-    <div id="observablehq-bar_chart_cell-4c2eb3ea"></div>
+    <div id="observablehq-bar_chart_cell-50c5675d"></div>
+
+    <!-- Valor energético do prato -->
+    <div class="conteiner">
+        <div id="observablehq-valor_energetico-50c5675d"></div>
+    </div>
 
     <!-- Parágrafo final -->
     <div class="conteiner">
@@ -164,23 +169,23 @@
 
     <!-- Parte só últil no backend -->
     <div class="not_visible">
-        <div id="observablehq-init_bar_chart_cell-4c2eb3ea"></div>
-        <div id="observablehq-outputs_alimentos-4c2eb3ea"></div>
-        <div id="observablehq-filter_food_to_bar_chart-4c2eb3ea"></div>
-        <div id="observablehq-alimentos_selecionados-4c2eb3ea"></div>
-        <div id="observablehq-filtro_textual-4c2eb3ea"></div>
-        <div id="observablehq-num_alimento-4c2eb3ea"></div>
-        <div id="observablehq-botao_confirmar-4c2eb3ea"></div>
-        <div id="observablehq-function_to_sliders_of_quantity_of_food_cell-4c2eb3ea"></div>
-        <div id="observablehq-function_confirm_buttom-4c2eb3ea"></div>
-        <div id="observablehq-update_dropdown-4c2eb3ea"></div>
-        <div id="observablehq-update_dropdown_cell-4c2eb3ea"></div>
-        <div id="observablehq-brush_cell-4c2eb3ea"></div>
-        <div id="observablehq-violinplot_function_cell-4c2eb3ea"></div>
-        <div id="observablehq-BarChart-4c2eb3ea"></div>
-        <div id="observablehq-chart-4c2eb3ea"></div>
-        <div id="observablehq-pallete-4c2eb3ea"></div>
-        <p>Credit: <a href="https://observablehq.com/d/ffb89fcb60d326fa@1768">Untitled by Bruno Pereira Fornaro</a></p>
+        <div id="observablehq-init_bar_chart_cell-50c5675d"></div>
+        <div id="observablehq-outputs_alimentos-50c5675d"></div>
+        <div id="observablehq-filter_food_to_bar_chart-50c5675d"></div>
+        <div id="observablehq-alimentos_selecionados-50c5675d"></div>
+        <div id="observablehq-filtro_textual-50c5675d"></div>
+        <div id="observablehq-num_alimento-50c5675d"></div>
+        <div id="observablehq-botao_confirmar-50c5675d"></div>
+        <div id="observablehq-function_to_sliders_of_quantity_of_food_cell-50c5675d"></div>
+        <div id="observablehq-function_confirm_buttom-50c5675d"></div>
+        <div id="observablehq-update_dropdown-50c5675d"></div>
+        <div id="observablehq-update_dropdown_cell-50c5675d"></div>
+        <div id="observablehq-brush_cell-50c5675d"></div>
+        <div id="observablehq-violinplot_function_cell-50c5675d"></div>
+        <div id="observablehq-BarChart-50c5675d"></div>
+        <div id="observablehq-chart-50c5675d"></div>
+        <div id="observablehq-pallete-50c5675d"></div>
+        <p>Credit: <a href="https://observablehq.com/d/ffb89fcb60d326fa@1777">Untitled by Bruno Pereira Fornaro</a></p>
     </div>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
@@ -188,28 +193,29 @@
     <!-- Link com o repositório do projeto no observable: https://observablehq.com/d/ffb89fcb60d326fa -->
     <script type="module">
         import { Runtime, Inspector } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-        import define from "https://api.observablehq.com/d/ffb89fcb60d326fa@1768.js?v=3";
+        import define from "https://api.observablehq.com/d/ffb89fcb60d326fa@1777.js?v=3";
         new Runtime().module(define, name => {
-            if (name === "inserts_cell") return new Inspector(document.querySelector("#observablehq-inserts_cell-4c2eb3ea"));
-            if (name === "insert_atualize_barchart_cell") return new Inspector(document.querySelector("#observablehq-insert_atualize_barchart_cell-4c2eb3ea"));
-            if (name === "list_food_cell") return new Inspector(document.querySelector("#observablehq-list_food_cell-4c2eb3ea"));
-            if (name === "sliders_quantity_cell") return new Inspector(document.querySelector("#observablehq-sliders_quantity_cell-4c2eb3ea"));
-            if (name === "bar_chart_cell") return new Inspector(document.querySelector("#observablehq-bar_chart_cell-4c2eb3ea"));
-            if (name === "init_bar_chart_cell") return new Inspector(document.querySelector("#observablehq-init_bar_chart_cell-4c2eb3ea"));
-            if (name === "outputs_alimentos") return new Inspector(document.querySelector("#observablehq-outputs_alimentos-4c2eb3ea"));
-            if (name === "filter_food_to_bar_chart") return new Inspector(document.querySelector("#observablehq-filter_food_to_bar_chart-4c2eb3ea"));
-            if (name === "alimentos_selecionados") return new Inspector(document.querySelector("#observablehq-alimentos_selecionados-4c2eb3ea"));
-            if (name === "filtro_textual") return new Inspector(document.querySelector("#observablehq-filtro_textual-4c2eb3ea"));
-            if (name === "num_alimento") return new Inspector(document.querySelector("#observablehq-num_alimento-4c2eb3ea"));
-            if (name === "botao_confirmar") return new Inspector(document.querySelector("#observablehq-botao_confirmar-4c2eb3ea"));
-            if (name === "function_to_sliders_of_quantity_of_food_cell") return new Inspector(document.querySelector("#observablehq-function_to_sliders_of_quantity_of_food_cell-4c2eb3ea"));
-            if (name === "function_confirm_buttom") return new Inspector(document.querySelector("#observablehq-function_confirm_buttom-4c2eb3ea"));
-            if (name === "update_dropdown") return new Inspector(document.querySelector("#observablehq-update_dropdown-4c2eb3ea"));
-            if (name === "update_dropdown_cell") return new Inspector(document.querySelector("#observablehq-update_dropdown_cell-4c2eb3ea"));
-            if (name === "brush_cell") return new Inspector(document.querySelector("#observablehq-brush_cell-4c2eb3ea"));
-            if (name === "violinplot_function_cell") return new Inspector(document.querySelector("#observablehq-violinplot_function_cell-4c2eb3ea"));
-            if (name === "BarChart") return new Inspector(document.querySelector("#observablehq-BarChart-4c2eb3ea"));
-            if (name === "pallete") return new Inspector(document.querySelector("#observablehq-pallete-4c2eb3ea"));
+            if (name === "inserts_cell") return new Inspector(document.querySelector("#observablehq-inserts_cell-50c5675d"));
+            if (name === "insert_atualize_barchart_cell") return new Inspector(document.querySelector("#observablehq-insert_atualize_barchart_cell-50c5675d"));
+            if (name === "list_food_cell") return new Inspector(document.querySelector("#observablehq-list_food_cell-50c5675d"));
+            if (name === "sliders_quantity_cell") return new Inspector(document.querySelector("#observablehq-sliders_quantity_cell-50c5675d"));
+            if (name === "bar_chart_cell") return new Inspector(document.querySelector("#observablehq-bar_chart_cell-50c5675d"));
+            if (name === "valor_energetico") return new Inspector(document.querySelector("#observablehq-valor_energetico-50c5675d"));
+            if (name === "init_bar_chart_cell") return new Inspector(document.querySelector("#observablehq-init_bar_chart_cell-50c5675d"));
+            if (name === "outputs_alimentos") return new Inspector(document.querySelector("#observablehq-outputs_alimentos-50c5675d"));
+            if (name === "filter_food_to_bar_chart") return new Inspector(document.querySelector("#observablehq-filter_food_to_bar_chart-50c5675d"));
+            if (name === "alimentos_selecionados") return new Inspector(document.querySelector("#observablehq-alimentos_selecionados-50c5675d"));
+            if (name === "filtro_textual") return new Inspector(document.querySelector("#observablehq-filtro_textual-50c5675d"));
+            if (name === "num_alimento") return new Inspector(document.querySelector("#observablehq-num_alimento-50c5675d"));
+            if (name === "botao_confirmar") return new Inspector(document.querySelector("#observablehq-botao_confirmar-50c5675d"));
+            if (name === "function_to_sliders_of_quantity_of_food_cell") return new Inspector(document.querySelector("#observablehq-function_to_sliders_of_quantity_of_food_cell-50c5675d"));
+            if (name === "function_confirm_buttom") return new Inspector(document.querySelector("#observablehq-function_confirm_buttom-50c5675d"));
+            if (name === "update_dropdown") return new Inspector(document.querySelector("#observablehq-update_dropdown-50c5675d"));
+            if (name === "update_dropdown_cell") return new Inspector(document.querySelector("#observablehq-update_dropdown_cell-50c5675d"));
+            if (name === "brush_cell") return new Inspector(document.querySelector("#observablehq-brush_cell-50c5675d"));
+            if (name === "violinplot_function_cell") return new Inspector(document.querySelector("#observablehq-violinplot_function_cell-50c5675d"));
+            if (name === "BarChart") return new Inspector(document.querySelector("#observablehq-BarChart-50c5675d"));
+            if (name === "pallete") return new Inspector(document.querySelector("#observablehq-pallete-50c5675d"));
         });
     </script>
 </body>
