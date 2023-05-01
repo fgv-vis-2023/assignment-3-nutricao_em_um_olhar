@@ -8,7 +8,9 @@ Trabalho elaborado pelos alunos Bruno Fornaro Pereira [Bruno Fornaro Pereira](ht
 
 ## Nutrição em um Olhar
 
-O tema escolhido para esse trabalho está relacionado à área de nutrição, onde procuramos, a partir de uma visualização interativa, possibilitar ao usuário um maior entendimento sobre os alimentos (macronutrientes) e compreender se suas escolhas alimentares estão balanceadas: "O conhecimento da composição dos alimentos consumidos no Brasil é fundamental para se alcançar a segurança alimentar e nutricional. As informações de composição de alimentos são pilares básicos para a educação nutricional e a avaliação da ingestão de nutrientes de indivíduos." (Tabela Brasileira de Composição de Alimentos – TACO, 4ª edição revisada e ampliada).
+O tema escolhido para esse trabalho está relacionado à área de nutrição, onde procuramos, a partir de uma visualização interativa, possibilitar ao usuário um maior entendimento sobre os alimentos (macronutrientes) e compreender se suas escolhas alimentares estão balanceadas: "O conhecimento da composição dos alimentos consumidos no Brasil é fundamental para se alcançar a segurança alimentar e nutricional. As informações de composição de alimentos são pilares básicos para a educação nutricional e a avaliação da ingestão de nutrientes de indivíduos." (Tabela Brasileira de Composição de Alimentos – TACO, 4ª edição revisada e ampliada). 
+
+Nesse sentido, a principal pergunta que nos interessa responder é quais alimentos (e combinações) e em quais quantidades fornecem uma alimentação adequada em macronutrientes? 
 
  Os dados necessários foram obtidos através do Kaggle, sendo o dataset escolhido: [Composição nutricional de alimentos - TACO](https://www.kaggle.com/datasets/ispangler/composio-nutricional-de-alimentos-taco). Nele temos dados sobre a composição dos principais alimentos consumidos no Brasil, baseado em um plano de amostragem que garante valores representativos, com análises realizadas por laboratórios com capacidade analítica comprovada. 
 
