@@ -37,4 +37,4 @@ De começo, passamos bastante tempo entendendo como eram as funcionalidades do D
 ### Links importantes
 * [Notebook observable](https://observablehq.com/d/ffb89fcb60d326fa)
 * [Página do projeto final](https://fgv-vis-2023.github.io/assignment-3-nutricao_em_um_olhar/)
-* [Links do MVP](https://fgv-vis-2023.github.io/assignment-3-nutricao_em_um_olhar/links_mvp.html/)
+* [Links do MVP](https://fgv-vis-2023.github.io/assignment-3-nutricao_em_um_olhar/links_mvp.html)
