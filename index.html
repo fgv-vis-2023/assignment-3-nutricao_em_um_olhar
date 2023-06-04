@@ -2,11 +2,20 @@
 <html>
 
 <head>
-    <!-- Link com o repositório do projeto no observable: https://observablehq.com/d/ffb89fcb60d326fa -->
-    <!-- Nome na aba do navegador -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nutrição em um olhar</title>
-    <!-- Import o D3 -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
     <!-- Folha de estilos -->
     <link rel="stylesheet" href="style.css">
     <!-- Fontes -->
@@ -15,206 +24,160 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
         rel="stylesheet">
+
+
+    <!-- Importar scripts do Firebase -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyAhS7zhyXHLNGLpQ9saPZZg8Aol8jWaGPA",
+            authDomain: "nutricao-em-um-olhar.firebaseapp.com",
+            projectId: "nutricao-em-um-olhar",
+            storageBucket: "nutricao-em-um-olhar.appspot.com",
+            messagingSenderId: "101019466395",
+            appId: "1:101019466395:web:d22a7fda84e635e544243e",
+            measurementId: "G-MNX0D151MB"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth();
+        const db = getFirestore(app);
+
+        const register_elemente = document.getElementById('register');
+        register_elemente.addEventListener('click', register);
+
+        const login_element = document.getElementById('login');
+        login_element.addEventListener('click', login);
+
+        function register() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    // Salva o usuário nos cookies
+                    document.cookie = "user=" + user.uid;
+                    // Salva o usuário no localStorage
+                    localStorage.setItem("user", user.uid);
+                    
+                    // Cria um documento para o usuário no Firestore
+                    setDoc(doc(db, "user", user.uid, "current_data"), {
+                        // Peso
+                        weight: 0,
+                        // Calorias diárias
+                        daily_calories: 0,
+                        // Percentual de carboidratos
+                        carbs_percent: 0,
+                        // Percentual de lipídios
+                        lipids_percent: 0,
+                        // Percentual de proteínas
+                        protein_percent: 0,
+                      })
+                      .then(() => {
+                          // Operação de gravação concluída com sucesso
+                          // Troca para a página app.html
+                          window.location.href = "objetives.html";
+                      })
+                      .catch((error) => {
+                          // Ocorreu um erro ao gravar no Firestore
+                          console.error("Erro ao criar o documento: ", error);
+                      });
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(email)
+                    console.log(password)
+                    console.log(errorCode)
+                    console.log(errorMessage)
+                    // ..
+                });
+        }
+
+        function login() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            const auth = getAuth();
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    // Salva o usuário no Local Storage
+                    localStorage.setItem("user", user.uid);
+
+                    // Troca para a página app.html
+                    window.location.href = "app.html";
+
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // Imprimir erro para o usuário
+                    // ...
+                });
+
+        }
+    </script>
 </head>
 
 <body>
     <!-- Título da página -->
-    <div class="conteiner">
+    <div class="row justify-content-center conteiner">
         <h1>NUTRIÇÃO EM UM OLHAR</h1>
     </div>
-    
-    <!-- Parágrafo de introdução -->
-    <div class="conteiner">
-        <h2>Sobre a ferramenta</h2>
-        <p class="introducao">O objetivo central dessa ferramenta é possibilitar ao visualizador um maior
-            entendimento sobre os alimentos (em especial, os macronutrientes)
-            e compreender se suas escolhas alimentares estão balanceadas.</p>
 
-        <p class="introducao">A partir de informações de peso, número de refeições por dia (por padrão,
-            definido como 3), quantidade de proteínas por quilograma (por padrão, 1.0g) e as proporções
-            desejadas de macronutrientes (por padrão, estão definidas como 25% para gorduras, 25% para
-            proteínas e 50% para carboidratos, recomendações da nutricionista Isolda Vasconcelos em
-            <a
-                href="https://www.boasaude.com.br/nutricao/15404/qual-a-proporcao-de-proteina-e-carboidratos-ideal-nas-refeicoes.html">
-                Saúde e Nutrição
-            </a>).
-            Essas proporções podem ser alteradas pelo usuário a depender do seu objetivo. Por exemplo, pessoas
-            sedentárias consomem, em geral, menos proteínas do que um atleta. Para entender melhor em qual grupo
-            você se encaixa, recomendamos ler algumas referências, como em <a
-                href="https://www.atletis.com.br/quantidade-proteina-dia#:~:text=Para%20adultos%20sedent%C3%A1rios%2C%20a%20quantidade,g%20a%20cada%20quilo%20no%20m%C3%A1ximo.">
-                "Descubra a quantidade ideal de proteína por dia" - Atletis Blog.
-            </a>
-        </p>
+    <!-- Formulário de login/registro -->
+    <form>
+        <div class="row justify-content-center">
+            <div class="col-md-4 conteiner">
+                <div class="form-group">
+                    <label for="email">Endereço de email</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                        placeholder="Seu email">
+                    <small id="emailHelp" class="form-text text-muted">Nunca vamos compartilhar seu email, com
+                        ninguém.</small>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" class="form-control" id="password" placeholder="Senha">
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Aceito os termos mesmo sem saber quais
+                        são.</label>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button class="btn btn-primary" type="button" id="login">Login</button>
 
-        <p class="introducao"> Os dados necessários foram obtidos através do Kaggle, em
-            <a href="https://www.kaggle.com/datasets/ispangler/composio-nutricional-de-alimentos-taco">
-                Composição nutricional de alimentos - TACO
-            </a>. Nele temos dados sobre a composição dos principais alimentos consumidos no Brasil, baseado em um plano
-            de amostragem que garante valores representativos, com análises realizadas por laboratórios com
-            capacidade analítica comprovada.
-        </p>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn btn-primary" type="button" id="register">Register</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
-    </div>
-
-    <!-- Como utilizar a ferramenta -->
-    <div class="conteiner">
-        <h2>Como utilizar a ferramenta</h2>
-        <ul id="como_utilizar">
-            <li>Começamos informando alguns dados iniciais do usuário (caso não forem preenchidos, serão usados os dados
-                padrão):</li>
-            <ul>
-                <li>
-                    Peso: o peso do usuário em quilogramas (kg);
-                </li>
-                <li>
-                    Número de refeições: o número de refeições que o usuário faz por dia (por padrão, 3);
-                </li>
-                <li>
-                    Quantidade de proteínas por quilograma: a quantidade de proteínas em gramas que o usuário deseja
-                    consumir por Kg de massa corporal em um dia (por padrão, 1.0g);
-                </li>
-                <li>
-                    Proporção de proteína: a proporção de calorias com a fonte sendo proteína que o usuário deseja
-                    consumir em um dia (por padrão, 25%);
-                </li>
-                <li>
-                    Proporção de carboidrato: a proporção de calorias com a fonte sendo carboidrato que o usuário deseja
-                    consumir em um dia (por padrão, 50%);
-                </li>
-                <li>
-                    Proporção de lipídios (gordura): a proporção de calorias com a fonte sendo lipídeos que o usuário
-                    deseja consumir em um dia (por padrão, 25%),
-                </li>
-                <li>
-                    Tolerância: margem de erro na alimentação (Tolerância igual a 10% significa que a alimentação pode
-                    ter até 10% a mais ou a menos do que o desejado).
-                </li>
-            </ul>
-            <li>Com isso, podemos selecionar até 3 alimentos para uma refeição, os quais podem ser filtrados por:</li>
-            <ul>
-                <li>Texto: você pode inserir um texto para filtrar a lista com apenas os alimentos que contém aquela
-                    porção de texto (como uma palavra em específico, por exemplo),</li>
-                <li>Gráfico de violino (na esquerda): você pode selecionar uma porção do gráfico de violino (com a
-                    função de "brush") para filtrar a lista
-                    com apenas os alimentos que contém aquela porção de macronutrientes (a intersecção dos filtros).
-                </li>
-            </ul>
-            <li>Após escolher um alimento, devemos escolher qual dos alimentos estamos escolhendo (1, 2 ou 3), para
-                isso, utilizamos o dropdown ao lado do que seleciona o alimento;</li>
-            <li>Após escolher um alimento e qual sua "posição" no prato, devemos clicar no botão de confirmar para
-                atualizar os dados com a escolha (após isso podemos reiniciar o processo e escolher os outros alimentos,
-                até formar o prato com até 3 alimentos),</li>
-            <li>Após selecionar todos os alimentos do prato, é necessário indicar a quantidade de cada um deles que será
-                consumida na
-                refeição
-                (por padrão, 50g), para isso, temos um slider que nos permite variar a quantidade desejada.</li>
-        </ul>
-        <p>Com isso, conseguimos ver pelo gráfico de barras (à direita), a partir das cores, se a refeição está balanceada ou não, sendo: verde para balanceada, vermelho para
-            excesso do macronutriente e amerelo para falta do macronutriente na refeição.</p>
-        <p>Vale lembrar que alguns valores padrão foram definidos, com base nas opiniões de alguns nutricionistas que
-            foram indicados em fontes já citadas anteriormente. Esses valores podem ser alterados pelo usuário, caso ele
-            tenha outra recomendação de alimentação (dado que isso pode variar de acordo com o objetivo do usuário
-            também).</p>
-        <br>
-        <p>Observação: a página foi desenvolvida para ficar bem dimensionada para uma tela (de notebook) com 15.6",
-            podendo ficar com algo mal alinhado em outras dimensões (infelizmente a página não é bem responsiva). Se
-            algo estiver fora do lugar, recomendamos utilizar a função de zoom out do navegador (atalho "CTRL -" para
-            grande parte dos navegadores).
-        </p>
-
-    </div>
-
-    <!-- Área para inserir informações do usuário -->
-    <div class="conteiner">
-        <h2>Informações do usuário</h2>
-        <div id="observablehq-inserts_cell-50c5675d"></div>
-    </div>
-
-    <!-- Parte só últil no backend -->
-    <div id="observablehq-insert_atualize_barchart_cell-50c5675d" class="not_visible"></div>
-
-    <!-- Seletor dos alimentos e sliders -->
-    <div id="seletor_e_sliders">
-        <!-- Seletor dos alimentos -->
-        <div id="observablehq-list_food_cell-50c5675d"></div>
-
-        <!-- Sliders para os pesos dos alimentos -->
-        <div id="observablehq-sliders_quantity_cell-50c5675d"></div>
-    </div>
-
-    <!-- Gráficos -->
-    <div id="observablehq-bar_chart_cell-50c5675d"></div>
-
-    <!-- Valor energético do prato -->
-    <div class="conteiner">
-        <div id="observablehq-valor_energetico-50c5675d"></div>
-    </div>
-
-    <!-- Parágrafo final -->
-    <div class="conteiner">
-        <h2>Links importantes</h2>
-        <p>Por fim, gostaríamos de deixar alguns links importantes desse projeto:</p>
-        <ul>
-            <li>
-                O <a href="https://observablehq.com/d/ffb89fcb60d326fa">repositório no observable</a> com o notebook no
-                qual foram desenvolvidas as visualizações desse projeto,
-            </li>
-            <li>
-                O <a href="https://github.com/fgv-vis-2023/assignment-3-nutricao_em_um_olhar">repositório no github</a>
-                com o código fonte desse projeto (a página html) e o relatório do mesmo.
-            </li>
-        </ul>
-    </div>
-
-    <!-- Parte só últil no backend -->
-    <div class="not_visible">
-        <div id="observablehq-init_bar_chart_cell-50c5675d"></div>
-        <div id="observablehq-outputs_alimentos-50c5675d"></div>
-        <div id="observablehq-filter_food_to_bar_chart-50c5675d"></div>
-        <div id="observablehq-alimentos_selecionados-50c5675d"></div>
-        <div id="observablehq-filtro_textual-50c5675d"></div>
-        <div id="observablehq-num_alimento-50c5675d"></div>
-        <div id="observablehq-botao_confirmar-50c5675d"></div>
-        <div id="observablehq-function_to_sliders_of_quantity_of_food_cell-50c5675d"></div>
-        <div id="observablehq-function_confirm_buttom-50c5675d"></div>
-        <div id="observablehq-update_dropdown-50c5675d"></div>
-        <div id="observablehq-update_dropdown_cell-50c5675d"></div>
-        <div id="observablehq-brush_cell-50c5675d"></div>
-        <div id="observablehq-violinplot_function_cell-50c5675d"></div>
-        <div id="observablehq-BarChart-50c5675d"></div>
-        <div id="observablehq-chart-50c5675d"></div>
-        <div id="observablehq-pallete-50c5675d"></div>
-        <p>Credit: <a href="https://observablehq.com/d/ffb89fcb60d326fa@1777">Untitled by Bruno Pereira Fornaro</a></p>
-    </div>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
-
-    <!-- Link com o repositório do projeto no observable: https://observablehq.com/d/ffb89fcb60d326fa -->
-    <script type="module">
-        import { Runtime, Inspector } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-        import define from "https://api.observablehq.com/d/ffb89fcb60d326fa@1777.js?v=3";
-        new Runtime().module(define, name => {
-            if (name === "inserts_cell") return new Inspector(document.querySelector("#observablehq-inserts_cell-50c5675d"));
-            if (name === "insert_atualize_barchart_cell") return new Inspector(document.querySelector("#observablehq-insert_atualize_barchart_cell-50c5675d"));
-            if (name === "list_food_cell") return new Inspector(document.querySelector("#observablehq-list_food_cell-50c5675d"));
-            if (name === "sliders_quantity_cell") return new Inspector(document.querySelector("#observablehq-sliders_quantity_cell-50c5675d"));
-            if (name === "bar_chart_cell") return new Inspector(document.querySelector("#observablehq-bar_chart_cell-50c5675d"));
-            if (name === "valor_energetico") return new Inspector(document.querySelector("#observablehq-valor_energetico-50c5675d"));
-            if (name === "init_bar_chart_cell") return new Inspector(document.querySelector("#observablehq-init_bar_chart_cell-50c5675d"));
-            if (name === "outputs_alimentos") return new Inspector(document.querySelector("#observablehq-outputs_alimentos-50c5675d"));
-            if (name === "filter_food_to_bar_chart") return new Inspector(document.querySelector("#observablehq-filter_food_to_bar_chart-50c5675d"));
-            if (name === "alimentos_selecionados") return new Inspector(document.querySelector("#observablehq-alimentos_selecionados-50c5675d"));
-            if (name === "filtro_textual") return new Inspector(document.querySelector("#observablehq-filtro_textual-50c5675d"));
-            if (name === "num_alimento") return new Inspector(document.querySelector("#observablehq-num_alimento-50c5675d"));
-            if (name === "botao_confirmar") return new Inspector(document.querySelector("#observablehq-botao_confirmar-50c5675d"));
-            if (name === "function_to_sliders_of_quantity_of_food_cell") return new Inspector(document.querySelector("#observablehq-function_to_sliders_of_quantity_of_food_cell-50c5675d"));
-            if (name === "function_confirm_buttom") return new Inspector(document.querySelector("#observablehq-function_confirm_buttom-50c5675d"));
-            if (name === "update_dropdown") return new Inspector(document.querySelector("#observablehq-update_dropdown-50c5675d"));
-            if (name === "update_dropdown_cell") return new Inspector(document.querySelector("#observablehq-update_dropdown_cell-50c5675d"));
-            if (name === "brush_cell") return new Inspector(document.querySelector("#observablehq-brush_cell-50c5675d"));
-            if (name === "violinplot_function_cell") return new Inspector(document.querySelector("#observablehq-violinplot_function_cell-50c5675d"));
-            if (name === "BarChart") return new Inspector(document.querySelector("#observablehq-BarChart-50c5675d"));
-            if (name === "pallete") return new Inspector(document.querySelector("#observablehq-pallete-50c5675d"));
-        });
+    <!-- Se você precisar adicionar algum script adicional, coloque-o aqui -->
+    <script>
+        // Coloque scripts adicionais aqui, se necessário
     </script>
 </body>
+
+</html>
